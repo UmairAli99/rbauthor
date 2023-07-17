@@ -1,0 +1,149 @@
+﻿@model List<Site>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+    <style>
+        /* Define CSS styles here */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top:0px;
+            padding: 2rem 1.5rem;
+            margin-right:100px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #site-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+       /* th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .thead{
+            background-color: #343a40;
+            color: white;
+        }*/
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .delete-button:hover {
+                background-color: darkred;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+        .delete-all-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right:20px;
+        }
+
+        .delete-all-button:hover {
+            background-color: darkred;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .add-sites-button {
+            background-color: white;
+            color: #343a40;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-left: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .add-sites-button:hover {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-left: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            }
+    </style>
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var successMessage = urlParams.get('successMessage');
+        if (successMessage === 'true') {
+            alert('Deleted Successfully!');
+        }
+    </script>
+</head>
+
+<h2 style="text-align:center;background-color:#343a40;width:100%;color:white;padding:20px 0px; margin-top:80px;">
+<div class="button-container">
+        <a asp-controller="Admin" asp-action="SaveSites">
+            <button class="add-sites-button" >Add Sites</button>
+        </a>
+    All Sites
+        <form asp-controller="Admin" asp-action="DeleteAllSites" method="post">
+            <button type="submit" class="delete-all-button" style="margin-top:10px; padding: 10px 20px;">Delete All</button>
+        </form>
+</div>
+</h2>
+<table class="table" id="site-table">
+    <thead>
+        <tr>
+            <th style="background-color: #343a40;
+            color: white;">Site ID</th>
+            <th style="background-color: #343a40;
+            color: white;">Site Address</th>
+            <th style="background-color: #343a40;
+            color: white;">Latitude</th>
+            <th style="background-color: #343a40;
+            color: white;">Longitude</th>
+            <th style="background-color: #343a40;
+            color: white;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var site in Model)
+        {
+            <tr>
+                <td style="background-color: #343a40;
+            color: white;">
+                    @site.SiteId
+                </td>
+                <td>@site.SiteAddress</td>
+                <td>@site.Latitude</td>
+                <td>@site.Longitude</td>
+                <td>
+                    <form asp-controller="Admin" asp-action="DeleteSite" method="post">
+                        <input type="hidden" name="siteId" value="@site.SiteId" />
+                        <button type="submit" class="delete-button" style="padding: 15px 30px;margin-right:-20px; margin-left:40px">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

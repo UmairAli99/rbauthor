@@ -1,0 +1,134 @@
+﻿@model List<Shift>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    string username = User.Identity.Name;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+    <style>
+        table {
+            border-collapse:collapse;
+            width: 100%;
+            margin-top: 85px;
+            margin-bottom: 40px;
+            padding: 2rem 1.5rem;
+            
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #shift-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+        .date-column {
+            background-color: #343a40;
+            color: white;
+        }
+        
+    </style>
+</head>
+
+
+@*<h1 style="text-align: center;">Shifts</h1>*@
+
+@*<table>
+    <thead>
+        <tr>
+            <th class="date-column">Date</th>
+            <th>Guard</th>
+            <th>Location</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Working Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var day in daysOfWeek)
+        {
+            foreach (var shift in Model.Where(s => s.StartDate.Date == day.Date))
+            {
+                var guardCount = shift.GuardNames.Count;
+
+                for (int i = 0; i < guardCount; i++)
+                {
+                    <tr>
+                        @if (i == 0)
+                        {
+                            <td rowspan="@guardCount" class="date-column">@day.ToString("ddd, MMM d")</td>
+                        }
+                        <td>@shift.GuardNames.ElementAt(i)</td>
+                        <td>@shift.SiteAddress</td>
+                        <td>@shift.StartTime.ToShortTimeString()</td>
+                        <td>@shift.EndTime.ToShortTimeString()</td>
+                        <td>@(shift.EndTime - shift.StartTime)</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>*@
+@{
+    var today = DateTime.Today;
+    var daysOfWeek = new List<DateTime>();
+    for (int i = 0; i < 7; i++)
+    {
+        daysOfWeek.Add(today.AddDays(i));
+    }
+}
+<table id="shift-table">
+    <thead>
+        <tr>
+            <th class="date-column">Date</th>
+            <th>Guard ID</th>
+            <th>Guard Name</th>
+            <th>Location</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Working Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var day in daysOfWeek)
+        {
+            foreach (var shift in Model.Where(s => s.StartDate.Date == day.Date))
+            {
+                var guardCount = shift.GuardNames.Count;
+
+                for (int i = 0; i < guardCount; i++)
+                {
+                    <tr>
+                        @if (i == 0)
+                        {
+                            <td rowspan="@guardCount" class="date-column">@day.ToString("ddd, MMM d")</td>
+                        }
+                        <td>@shift.GuardIds.ElementAt(i)</td>
+                        <td>@shift.GuardNames.ElementAt(i)</td>
+                        <td>@shift.SiteAddress</td>
+                        <td>@shift.StartTime.ToShortTimeString()</td>
+                        <td>@shift.EndTime.ToShortTimeString()</td>
+                        <td>@(shift.EndTime - shift.StartTime)</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+<a asp-controller="Admin" asp-action="CreateShift"><button style="background-color:#343a40; color:white;
+padding:20px 50px; border-radius:3px; margin-left:30px; font-weight:bolder;">Add Shifts</button></a>

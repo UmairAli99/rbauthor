@@ -1,0 +1,428 @@
+﻿@*@model List<Guard>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    #map {
+        height: 700px;
+        width: 100%;
+        margin-left: 12px;
+    }
+
+    .search-container {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="row" style="margin-left:20px;">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Enter Guard ID">
+        <button id="search-button" onclick="searchGuard()">Search</button>
+    </div>
+    <table id="guard-table">
+        <thead>
+            <tr>
+                <th>Guard ID</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var guard in Model)
+            {
+                <tr id="guard-@guard.guardId" data-latitude="@guard.Location?.Latitude" data-longitude="@guard.Location?.Longitude">
+                    <td>@guard.guardId</td>
+                    <td>@guard.Name</td>
+                    <td>@guard.Location?.Latitude</td>
+                    <td>@guard.Location?.Longitude</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div id="map"></div>
+    <script>
+        var map;
+        var marker;
+
+        function initMap(latitude, longitude, markerTitle) {
+            var defaultLatLng = { lat: 32.4945, lng: 74.5229 };
+            var markerPosition = { lat: latitude, lng: longitude };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: defaultLatLng,
+                zoom: 8
+            });
+
+            marker = new google.maps.Marker({
+                position: markerPosition,
+                map: map,
+                title: markerTitle
+            });
+            console.log('Latitude:', latitude);
+            console.log('Longitude:', longitude);
+        }
+
+        function searchGuard() {
+            var guardId = document.getElementById('search-input').value;
+
+            // Find the table row with the matching guard ID
+            var tableRow = $('#guard-table').find('tr#guard-' + guardId);
+            if (tableRow.length > 0) {
+                // Extract the latitude and longitude from the data attributes
+                var latitude = parseFloat(tableRow.data('latitude'));
+                var longitude = parseFloat(tableRow.data('longitude'));
+                var markerTitle = tableRow.find('td:nth-child(2)').text();
+                initMap(latitude, longitude, markerTitle);
+            } else {
+                console.log('Guard not found.');
+            }
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM_Wg_axkfHYWqXT61-Ahl9BeYb0Wa9uI&callback=initMap" async defer></script>
+</div>
+*@
+@*@model List<Guard>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    #map {
+        height: 700px;
+        width: 100%;
+        margin-left: 12px;
+    }
+
+    .search-container {
+        margin-bottom: 10px;
+    }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: dodgerblue;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .search-container button:hover {
+                background-color: #0056b3;
+            }
+
+    #guard-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        #guard-table th,
+        #guard-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #guard-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        #guard-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #guard-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        #guard-table td:nth-child(1) {
+            width: 10%;
+        }
+
+        #guard-table td:nth-child(2) {
+            width: 40%;
+        }
+
+        #guard-table td:nth-child(3),
+        #guard-table td:nth-child(4) {
+            width: 25%;
+        }
+</style>
+
+<div class="row" style="margin-left:20px;">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Enter Guard ID">
+        <button id="search-button" onclick="searchGuard()">Search</button>
+    </div>
+    <table id="guard-table">
+        <thead>
+            <tr>
+                <th>Guard ID</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var guard in Model)
+            {
+                <tr id="guard-@guard.guardId" data-latitude="@guard.Location?.Latitude" data-longitude="@guard.Location?.Longitude">
+                    <td>@guard.guardId</td>
+                    <td>@guard.Name</td>
+                    <td>@guard.Location?.Latitude</td>
+                    <td>@guard.Location?.Longitude</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div id="map"></div>
+    <script>
+        var map;
+        var marker;
+
+        function initMap(latitude, longitude, markerTitle) {
+            var defaultLatLng = { lat: 32.4945, lng: 74.5229 };
+            var markerPosition = { lat: latitude, lng: longitude };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: defaultLatLng,
+                zoom: 8
+            });
+
+            marker = new google.maps.Marker({
+                position: markerPosition,
+                map: map,
+                title: markerTitle
+            });
+            console.log('Latitude:', latitude);
+            console.log('Longitude:', longitude);
+        }
+
+        function searchGuard() {
+            var guardId = document.getElementById('search-input').value;
+
+            // Find the table row with the matching guard ID
+            var tableRow = $('#guard-table').find('tr#guard-' + guardId);
+            if (tableRow.length > 0) {
+                // Extract the latitude and longitude from the data attributes
+                var latitude = parseFloat(tableRow.data('latitude'));
+                var longitude = parseFloat(tableRow.data('longitude'));
+                var markerTitle = tableRow.find('td:nth-child(2)').text();
+                initMap(latitude, longitude, markerTitle);
+            } else {
+                console.log('Guard not found.');
+            }
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM_Wg_axkfHYWqXT61-Ahl9BeYb0Wa9uI&callback=initMap" async defer></script>
+</div>*@
+
+@model List<Guard>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    #map {
+        height: 700px;
+        width: 100%;
+        margin-left: 12px;
+    }
+
+    .search-container {
+        margin-bottom: 10px;
+    }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 4px;
+                background-color: white;
+                color: #353a40;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .search-container button:hover {
+                    background-color: #353a40;
+                    color:white;
+            }
+
+    #guard-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        #guard-table th,
+        #guard-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #guard-table th {
+                background-color: #343a40;
+                color: white;
+            text-align: left;
+        }
+
+        #guard-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #guard-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        #guard-table td:nth-child(1) {
+            width: 10%;
+        }
+
+        #guard-table td:nth-child(2) {
+            width: 40%;
+        }
+
+        #guard-table td:nth-child(3),
+        #guard-table td:nth-child(4) {
+            width: 25%;
+        }
+</style>
+</head>
+<h2 style="text-align:center;background-color:#343a40;width:100%;color:white;padding:20px 0px; ">
+<div class="row" style=" margin-top:85px;">
+        <div class="search-container" style="margin-left:-20px;">
+            Track Guards
+        <input type="text" id="search-input" placeholder="Enter Guard ID" style="margin-left:500px;">
+        <button id="search-button" onclick="searchGuard()">Search</button>
+    </div>
+    </h2>
+    <table id="guard-table" >
+        <thead>
+            <tr>
+                <th>Guard ID</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var guard in Model)
+            {
+                <tr id="guard-@guard.guardId" data-latitude="@guard.Location?.Latitude" data-longitude="@guard.Location?.Longitude">
+                <td style="background-color:#343a40;color:white">@guard.guardId</td>
+                    <td>@guard.Name</td>
+                    <td class="latitude-column">@guard.Location?.Latitude</td>
+                    <td class="longitude-column">@guard.Location?.Longitude</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row" style="margin-top:20px;">
+    <div id="map"></div>
+    <script>
+        var map;
+        var marker;
+
+        function initMap(latitude, longitude, markerTitle) {
+            var defaultLatLng = { lat: 32.4945, lng: 74.5229 };
+            var markerPosition = { lat: latitude, lng: longitude };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: defaultLatLng,
+                zoom: 8
+            });
+
+            marker = new google.maps.Marker({
+                position: markerPosition,
+                map: map,
+                title: markerTitle
+            });
+            console.log('Latitude:', latitude);
+            console.log('Longitude:', longitude);
+        }
+
+        function updateTableWithRealtimeData(guardId, latitude, longitude) {
+            // Update the latitude and longitude values in the table
+            var latitudeColumn = $('#guard-table').find('tr#guard-' + guardId + ' .latitude-column');
+            var longitudeColumn = $('#guard-table').find('tr#guard-' + guardId + ' .longitude-column');
+            latitudeColumn.text(latitude);
+            longitudeColumn.text(longitude);
+        }
+
+        function searchGuard() {
+            var guardId = document.getElementById('search-input').value;
+
+            // Find the table row with the matching guard ID
+            var tableRow = $('#guard-table').find('tr#guard-' + guardId);
+            if (tableRow.length > 0) {
+                // Extract the latitude and longitude from the data attributes
+                var latitude = parseFloat(tableRow.data('latitude'));
+                var longitude = parseFloat(tableRow.data('longitude'));
+                var markerTitle = tableRow.find('td:nth-child(2)').text();
+                initMap(latitude, longitude, markerTitle);
+
+                // Subscribe to real-time updates for the guard's location
+                var firebaseGuardRef = firebase.database().ref('Guards/' + guardId + '/Location');
+                firebaseGuardRef.on('value', function (snapshot) {
+                    var location = snapshot.val();
+                    if (location) {
+                        var updatedLatitude = location.Latitude;
+                        var updatedLongitude = location.Longitude;
+                        updateTableWithRealtimeData(guardId, updatedLatitude, updatedLongitude);
+                        initMap(updatedLatitude, updatedLongitude, markerTitle);
+                    }
+                });
+            } else {
+                console.log('Guard not found.');
+            }
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM_Wg_axkfHYWqXT61-Ahl9BeYb0Wa9uI&callback=initMap" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCn9b3wV_gXF5sLS_WCbhk01FUZQqdke0w",
+            authDomain: "tracking-system-9fc3f.firebaseapp.com",
+            databaseURL: "https://tracking-system-9fc3f-default-rtdb.firebaseio.com",
+            projectId: "tracking-system-9fc3f",
+            storageBucket: "tracking-system-9fc3f.appspot.com",
+            messagingSenderId: "575182874298",
+            appId: "1:575182874298:web:27b9cf19fba5fb89a8c483"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</div>
+

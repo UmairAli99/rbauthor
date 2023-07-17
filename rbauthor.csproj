@@ -7,13 +7,43 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\523835.png" />
+    <None Include="wwwroot\images\box.png" />
+    <None Include="wwwroot\images\cctv-alarms-.jpg" />
+    <None Include="wwwroot\images\gaus.png" />
+    <None Include="wwwroot\images\header-box.png" />
+    <None Include="wwwroot\images\logo white.png" />
+    <None Include="wwwroot\images\logo.png" />
+    <None Include="wwwroot\images\modern-futuristic-sci-fi-background.jpg" />
+    <None Include="wwwroot\images\scci.png" />
+    <None Include="wwwroot\images\Security-Blog-cover_1440x625.jpg" />
+    <None Include="wwwroot\images\security-guard-1.jpg" />
+    <None Include="wwwroot\images\security-guard-duties-responsibilities2.jpg" />
+    <None Include="wwwroot\images\security-guards.jpeg" />
+    <None Include="wwwroot\images\shutterstock_1008333007-2_480x480-2.jpg" />
+    <None Include="wwwroot\images\umt.png" />
+    <None Include="wwwroot\images\user.png" />
+    <None Include="wwwroot\images\USKTRoundLogo.png" />
+    <None Include="wwwroot\images\warehouse-security-600x700.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Firebase.Database" Version="1.0.0" />
+    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
+    <PackageReference Include="FirebaseNet" Version="1.0.1" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="Google.Cloud.Firestore" Version="3.3.0" />
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.5.0" />
+    <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+    <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
+    <PackageReference Include="popper.js" Version="1.16.1" />
   </ItemGroup>
 
 </Project>

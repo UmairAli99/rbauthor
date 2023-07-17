@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+@{
+    string username = User.Identity.Name;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <title>Admin Dashboard</title>
+     <link rel="icon" type="image/x-icon" href="~/images/logo white.png">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+</head>
+<body>
+    <input type="checkbox" id="nav-toggle">
+    <!--sidebar-->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="lab la-battle-net"></span><span>Admin</span></h2>
+        </div>
+        <!--sidebar menu-->
+        <div class="sidebar-menu">
+            <ul>
+                <li><a asp-controller="Dashboard" asp-action="Display"><span class="las la-home"></span><span>Home</span></a></li>
+                <li><a asp-controller="Admin" asp-action="Display"><span class="las la-igloo"></span><span>Dashboard</span></a></li>
+                <li><a asp-controller="Admin" asp-action="GetGuards"><span class="las la-shield-alt"></span><span>Guards</span></a></li>
+                <li><a asp-controller="Admin" asp-action="GetSites"><span class="las la-sitemap"></span><span>Sites</span></a></li>
+                <li><a asp-controller="Admin" asp-action="DisplayShifts"><span class="las la-calendar-plus"></span><span>Shifts</span></a></li>
+                <li><a asp-controller="Admin" asp-action="TrackGuards"><span class=" las la-map-marker-alt"></span><span>Track Guards</span></a></li>
+                <li><a asp-controller="Admin" asp-action="Contacts"><span class=" las la-phone"></span><span>Contacts</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                Dashboard
+            </h2>
+
+            <img src="~/images/logo.png" width="70px" height="70px" alt="" style="margin-top:-10px;margin-bottom:-15px;">
+
+            <div class="user-wrapper">
+                <img src="~/images/user.png" width="40px" height="40px" alt="">
+                <div>
+                    <h4>Welcome</h4>
+                    <small>@username</small><a href="/UserAuthentication/Logout" style="color:black;">, Logout</a>
+                </div>
+            </div>
+        </header>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+﻿@model rbauthor.Models.Shift
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Shift</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+       
+
+        .form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 40px;
+            background: linear-gradient(to bottom, #323a48, #343a40);
+            border: 1px solid #343a40;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color:white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .control-label {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #343a40;
+            border-radius: 3px;
+            transition: border-color 0.3s ease;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #343a40;
+                box-shadow: 0 0 5px rgba(52, 58, 64, 0.5);
+            }
+
+        .text-danger {
+            color: red;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #343a40;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        .popup{
+            color:white;
+        }
+            .btn-primary:hover {
+                background-color: #212529;
+            }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <h2 style="text-align: center;">Add New Shifts</h2>
+        @using (Html.BeginForm("CreateShift", "Admin", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ShiftId)
+                @Html.TextBoxFor(model => model.ShiftId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ShiftId)
+            </div>
+
+            <div class="form-group">
+                <button type="button" id="showGuardsBtn" class="btn btn-primary">Add Guards</button>
+            </div>
+
+            <div id="guardsPopup" class="popup" style="display: none;">
+                <h3>Select Guards</h3>
+                @foreach (var guard in ViewBag.Guards)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" id="guard_@guard.Value" name="GuardIds" value="@guard.Value" class="form-check-input" />
+                        <label for="guard_@guard.Value" class="form-check-label">@guard.Text (ID: @guard.Value)</label>
+                    </div>
+                }
+                <button type="button" id="closePopupBtn" class="btn btn-primary">Close</button>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SiteAddress)
+                @Html.DropDownListFor(model => model.SiteAddress, ViewBag.Sites as SelectList, "-- Select Site --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SiteAddress)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartTime)
+                @Html.TextBoxFor(model => model.StartTime, new { @class = "form-control", type = "datetime-local" })
+                @Html.ValidationMessageFor(model => model.StartTime)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndTime)
+                @Html.TextBoxFor(model => model.EndTime, new { @class = "form-control", type = "datetime-local" })
+                @Html.ValidationMessageFor(model => model.EndTime)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate)
+                @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate)
+                @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes)
+                @Html.TextAreaFor(model => model.Notes, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Notes)
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Shift</button>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#showGuardsBtn").click(function () {
+                $("#guardsPopup").show();
+            });
+
+            $("#closePopupBtn").click(function () {
+                $("#guardsPopup").hide();
+            });
+        });
+    </script>
+</body>
+</html>

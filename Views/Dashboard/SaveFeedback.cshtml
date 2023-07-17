@@ -1,0 +1,86 @@
+﻿@model Feedback
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+
+    .star-rating label {
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input[type="radio"]:checked ~ label {
+            color: #ffd700;
+        }
+        .container{
+        background-color: #343a40;
+        color:white;
+        margin-top:20px;
+        margin-bottom: 20px;
+        padding: 50px;
+        }
+</style>
+
+<div class="container">
+    <h2>Provide Feedback</h2>
+    @using (Html.BeginForm("SaveFeedback", "Dashboard", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.GuardId)
+            @Html.TextBoxFor(model => model.GuardId, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.GuardId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.GuardName)
+            @Html.TextBoxFor(model => model.GuardName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.GuardName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClientName)
+            @Html.TextBoxFor(model => model.ClientName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ClientName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date)
+            @Html.TextBoxFor(model => model.Date, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SiteAddress)
+            @Html.TextBoxFor(model => model.SiteAddress, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SiteAddress)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stars)
+            <div class="star-rating">
+                <input type="radio" id="star5" name="Stars" value="5" />
+                <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                <input type="radio" id="star4" name="Stars" value="4" />
+                <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                <input type="radio" id="star3" name="Stars" value="3" />
+                <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                <input type="radio" id="star2" name="Stars" value="2" />
+                <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                <input type="radio" id="star1" name="Stars" value="1" />
+                <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+            </div>
+            @Html.ValidationMessageFor(model => model.Stars)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment)
+            @Html.TextAreaFor(model => model.Comment, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="background-color:white; color:#343a40;;border:2px solid white;">Submit Feedback</button>
+    }
+</div>

@@ -1,4 +1,176 @@
-﻿@{
-
+﻿@model DisplayViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-Welcome, Admin you are only accessible to admin panel
+@{
+    string username = User.Identity.Name;
+}
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    var today = DateTime.Today;
+    var daysOfWeek = new List<DateTime>();
+    for (int i = 0; i < 7; i++)
+    {
+        daysOfWeek.Add(today.AddDays(i));
+    }
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+    <style>
+        #shift-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #shift-table th{
+            background-color: #f9f9f9;
+        }
+
+        #site-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .date-column {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+        <!--cards-->
+        <main>
+            <div class="dashboard-cards">
+                <div class="card-single">
+                    <div>
+                        <h1>@ViewBag.GuardCount</h1>
+                        <span>Guards</span>
+                    </div>
+                    <div>
+                        <span class="las la-shield-alt"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>@ViewBag.SiteCount</h1>
+                        <span>Sites</span>
+                    </div>
+                    <div>
+                        <span class="las la-sitemap"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>@ViewBag.ShiftCount</h1>
+                        <span>Shifts</span>
+                    </div>
+                    <div>
+                        <span class="las la-calendar-plus"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>10</h1>
+                        <span>Reports</span>
+                    </div>
+                    <div>
+                        <span class="las la-chalkboard"></span>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="recent-grid">
+                <div class="shifts">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Weekly Shifts</h3>
+                        <a asp-controller="Admin" asp-action="DisplayAllShifts" >
+                            <button style="cursor:pointer;">See all <span class="las la-arrow-right"></span></button>
+                        </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%" id="shift-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="date-column">Date</th>
+                                            <th>Guard ID</th>
+                                            <th>Guard Name</th>
+                                            <th>Location</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Working Hours</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var day in daysOfWeek)
+                                        {
+                                            foreach (var shift in Model.Shifts.Where(s => s.StartDate.Date == day.Date))
+                                            {
+                                                var guardCount = shift.GuardNames.Count;
+
+                                                for (int i = 0; i < guardCount; i++)
+                                                {
+                                                    <tr style="border-bottom: 2px solid #f0f0f0;">
+                                                        @if (i == 0)
+                                                        {
+                                                            <td rowspan="@guardCount" class="date-column">@day.ToString("ddd, MMM d")</td>
+                                                        }
+                                                        <td>@shift.GuardIds.ElementAt(i)</td>
+                                                        <td>@shift.GuardNames.ElementAt(i)</td>
+                                                        <td>@shift.SiteAddress</td>
+                                                        <td>@shift.StartTime.ToShortTimeString()</td>
+                                                        <td>@shift.EndTime.ToShortTimeString()</td>
+                                                        <td>@(shift.EndTime - shift.StartTime)</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sites" style="margin-left:-20px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sites</h3>
+                        <a asp-controller="Admin" asp-action="GetAllSites"> <button style="cursor:pointer;">See all <span class="las la-arrow-right"></span></button></a>
+                    </div>
+                        <div class="card-body">
+                        <table class="table" id="site-table">
+                            <thead>
+                                <tr style="background-color: #f9f9f9;">
+                                    <th>Site ID</th>
+                                    <th>Site Address</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var site in Model.Sites.Take(7))
+                                {
+                                    <tr>
+                                        <td>@site.SiteId</td>
+                                        <td>@site.SiteAddress</td>
+                                        <td>@site.Latitude</td>
+                                        <td>@site.Longitude</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+</body>

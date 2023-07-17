@@ -1,0 +1,88 @@
+﻿@model rbauthor.Models.Site
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+<style>
+    .site-form {
+        background: linear-gradient(to bottom, #323a48, #343a40);
+        padding: 50px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        border: 1px solid #343a40;
+        margin: 20px auto;
+        color: white;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid white;
+        border-radius: 3px;
+        transition: border-color 0.3s ease;
+        color: white;
+        background-color: transparent;
+    }
+
+        .form-control:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+    .text-danger {
+        color: red;
+    }
+
+    .btn-primary {
+        background-color: white;
+        color: #343a40;
+        font-weight:bold;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #333a48;
+            color:white;
+            font-weight:bold;
+        }
+</style>
+<form asp-controller="Admin" asp-action="SaveSites" method="post" class="site-form">
+    <h2 style="text-align: center;">Add New Site</h2>
+    <div class="form-group">
+        <label asp-for="SiteId" class="control-label">Site ID</label>
+        <input asp-for="SiteId" class="form-control" />
+        <span asp-validation-for="SiteId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SiteAddress" class="control-label">Site Address</label>
+        <textarea asp-for="SiteAddress" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="SiteAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Latitude" class="control-label">Latitude</label>
+        <input asp-for="Latitude" class="form-control" />
+        <span asp-validation-for="Latitude" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Longitude" class="control-label">Longitude</label>
+        <input asp-for="Longitude" class="form-control" />
+        <span asp-validation-for="Longitude" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+

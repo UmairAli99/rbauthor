@@ -2,4 +2,461 @@
     string username = User.Identity.Name;
 }
 
-Welcome @username
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/site.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="icon" type="image/x-icon" href="~/images/logo white.png">
+<script src="https://kit.fontawesome.com/c272487ffe.js" crossorigin="anonymous"></script>
+
+<div class="topbar bg-dark">
+    <i class="fa-solid fa-phone contactic" id="phone1"> </i><span class="contactin" id="phone">
+        +92 300 000
+        0000
+    </span>
+    <i class="fa-solid fa-envelope contactic"></i><span class="contactin" id="email">info@secguardspro.com</span>
+    <a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook"></i></a>
+    <a href="https://wa.me/923082289363" target="_blank"><i class="fa-brands fa-square-whatsapp"></i></a>
+    <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+    <a href=""><i class="fa-solid fa-envelope"></i></a>
+    <a href=""><i class="fa-solid fa-phone"></i></a>
+    <a href=""><i class="fa-brands fa-square-pinterest"></i></a>
+    <a href=""><i class="fa-brands fa-square-twitter"></i></a>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+            <img class="logo" src="~/images/logo white.png" alt=""> <span>
+                SecGuards
+                Pro
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu1">
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="About">About us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Armed" style="font-size:13px; padding:10px">
+                                Armed
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Unarmed" style="font-size:13px; padding:10px">
+                                Unarmed
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Commercial" style="font-size:13px; padding:10px">
+                                Commercial
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Event" style="font-size:13px; padding:10px">
+                                Event
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Airport" style="font-size:13px; padding:10px">
+                                Airport
+                                Protocol
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Executive" style="font-size:13px; padding:10px">
+                                Executive
+                                Protection
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="FAQs">FAQs</a>
+                </li>
+                
+            </ul>
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @if (User.IsInRole("admin"))
+                {
+                    <li><a href="/Admin/Display">Admin Page</a></li>
+                }
+                @if (User.IsInRole("user"))
+                {
+                    <li><a href="/Dashboard/SaveFeedback">Feedback</a></li>
+                }
+                    <li><a href="/UserAuthentication/Logout">Logout</a></li>
+                </ul>
+        </div>
+    </div>
+</nav>
+<!-- Banner -->
+<div id="banner">
+    <!-- Banner Content -->
+    <p class="textbig">Security is more than just a guard</p>
+    <p class="textsmall">
+        Best commercial security services are available at SecGuards Pro. <br> To avail our
+        services contact us. what are you waiting for press <br> the button right now and contact us.
+    </p>
+    <!-- Banner Buttons -->
+    <a href="#"><button class="contactbtn">Contact Us</button></a>
+</div>
+<!-- herotext -->
+<div class="herotext">
+    <div class="herotext1">
+        <h2>Providing Cost Effective</h2>
+        <h1>Security Solutions</h1>
+    </div>
+    <div class="divider">
+        <div class="divider1"></div>
+        <div class="divider2"></div>
+    </div>
+    <div class="herotext2">
+        <p class="herointro">
+            SecGuards Pro оffеrѕ уоu wіth thе rіght ѕесurіtу ѕоlutіоnѕ thаt mееt уоur nееdѕ аnd
+            budgеt. Wіth a wеаlth
+            оf еxреrіеnсе іn рrоvіdіng gооd ѕесurіtу ѕуѕtеmѕ, wе еnѕurе thаt уоur реrѕоnnеl аrе ѕаfе frоm hаrm аnd
+            ореrаtіоnѕ саn run аѕ ѕmооthlу аnd еffісіеntlу аѕ роѕѕіblе wіthоut hіndrаnсе. Our ѕоlutіоnѕ аrе соѕt
+            еffесtіvе аnd dеѕіgnеd tо ѕаvе уоu mоnеу bу еnѕurіng thаt уоur рrеmіѕеѕ аrе рrоtесtеd аgаіnѕt unwаntеd
+            іntrudеrѕ аnd уоur ѕtаffѕ аrе рrоtесtеd аgаіnѕt аttасk аnd еxрlоіtаtіоn.
+        </p>
+        <p class="herointro">
+            <strong>
+                More than five years in industry gives us the power to perform every day and every
+                time.
+            </strong>
+        </p>
+    </div>
+
+</div>
+<span class="btnleft">
+    <a asp-controller="Home" asp-action="Contact"><button class="btnblack">Contact Us</button></a>
+    <a asp-controller="Home" asp-action="About"><button class="btnblack">About Us</button></a>
+</span>
+
+<!-- Footer -->
+<div class="grid">
+    <div class="item item1">
+        <a asp-controller="Home" asp-action="Armed"><button class="btnrmore">Armed Security</button></a>
+    </div>
+    <div class="item item2">
+        <a asp-controller="Home" asp-action="Unarmed"><button class="btnrmore">Unarmed Security</button></a>
+    </div>
+    <div class="item item3">
+        <a asp-controller="Home" asp-action="Commercial"><button class="btnrmore">Commercial Security</button></a>
+    </div>
+    <div class="item item4">
+        <a asp-controller="Home" asp-action="Event"><button class="btnrmore">Event Security</button></a>
+    </div>
+    <div class="item item5">
+        <a asp-controller="Home" asp-action="Airport"><button class="btnrmore">Airport Protocol</button></a>
+    </div>
+    <div class="item item6">
+        <a asp-controller="Home" asp-action="Executive"><button class="btnrmore">Executive Protection</button></a>
+    </div>
+</div>
+
+<!-- <div class="services">
+    <div class="serv1"></div>
+    <div class="serv2"></div>
+    <div class="serv3"></div>
+    <div class="serv4"></div>
+</div> -->
+<!-- About us -->
+<div class="herotext" style="margin-bottom: 130px; margin-top: 100px;">
+    <div class="herotext1">
+        <h4 style="margin-left: -10px;">Who we are</h4>
+        <h1 style="margin-left: -10px;">About us</h1>
+    </div>
+    <div class="divider">
+        <div class="divider1"></div>
+        <div class="divider2"></div>
+    </div>
+    <div class="herotext2">
+        <p class="herointro">
+            Secguards Pro is a leading security surveillance company offering a range of
+            surveillance
+            services to its clients. With a team of highly trained professionals and cutting-edge technology,
+            Secguards
+            Pro ensures the protection and security of your premises, assets and personnel. Whether you are looking
+            for
+            a simple surveillance setup or a complex security solution, Secguards Pro has got you covered. Their
+            commitment to delivering high-quality and reliable services makes them the preferred choice for many
+            businesses and individuals.
+        </p>
+    </div>
+
+</div>
+<div class="content">
+    <div class="heading">
+        <h3>Take a look at</h3>
+        <h2>SERVICES BENEFITS</h2>
+    </div>
+    <div class="ctbold">
+        Our highly trained & qualified teams available to implement security <br> measures around any Retail,
+        Commercial or Industrial Site
+    </div>
+    <div class="ctmain">
+        <div class="ctmainleft">
+            <span>Technical Security Surveys</span> <span class="dotleft">.</span>
+            <p style="font-size: 14px; text-align: justify; margin-left: 115px; margin-right: 110px; margin-top: 10px; color: #f3f5f9">
+                A technical security survey is an assessment of an organization's technical infrastructure and
+                systems to identify vulnerabilities and potential risks
+            </p>
+            <span>CCTV Systems Network</span> <span class="dotleft">.</span>
+            <p style="font-size: 14px; text-align: justify; margin-left: 115px; margin-right: 110px; margin-top: 10px; color: #f3f5f9">
+                Connected to a network for remote monitoring and management, allowing organizations to enhance their
+                security and surveillance capabilities
+            </p>
+
+        </div>
+        <div class="ctmainlogo">
+            <img src="~/images/logo white.png" alt="">
+        </div>
+        <div class="ctmainright">
+            <span class="dotright">.</span> <span>Mobile Petrol Managment</span>
+            <p style="font-size: 14px; text-align: justify; margin-left: 110px; margin-right: 115px; margin-top: 10px; color: #f3f5f9">
+                A mobile petrol management system allows security companies to monitor the location and movement of
+                their guards in real-time through the use of GPS-enabled devices
+            </p>
+            <span class="dotright">.</span> <span>Access Control Systems</span>
+            <p style="font-size: 14px; text-align: justify; margin-left: 110px; margin-right: 115px; margin-top: 10px; color: #f3f5f9">
+                An access control system is a technology that regulates and monitors the entry and exit of
+                individuals into a building or restricted area
+            </p>
+        </div>
+    </div>
+    <div class="services">
+        <div class="serv1">
+            <h2>EVENTS SERVED</h2>
+            <h1>1k+</h1>
+        </div>
+        <div class="serv2">
+            <h2>QUALIFIED STAFF</h2>
+            <h1>450</h1>
+        </div>
+        <div class="serv3">
+            <h2>OUR LOCATIONS</h2>
+            <h1>1200</h1>
+        </div>
+        <div class="serv4">
+            <h2>AREA SERVING</h2>
+            <h1>550</h1>
+        </div>
+    </div>
+</div>
+
+<!--Section: Contact v.2-->
+<section class="mb-4" style="padding: 80px 0px;">
+
+    <!--Section heading-->
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+    <!--Section description-->
+    <p class="text-center w-responsive mx-auto mb-5">
+        Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you.
+    </p>
+
+    <div class="row cform" style="margin-left:50px;">
+
+        <!--Grid column-->
+        <div class="col-md-9 mb-md-0 mb-5">
+            <form id="contact-form" name="contact-form" action="" method="">
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label for="name" class="">Your name</label>
+                            <input type="text" id="name" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label for="email" class="">Your email</label>
+                            <input type="text" id="email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+                <!--Grid row-->
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="subject" class="">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <!--Grid row-->
+                <!--Grid row-->
+                <div class="row" style="margin-top: 20px;">
+
+                    <!--Grid column-->
+                    <div class="col-md-12">
+
+                        <div class="md-form">
+                            <label for="message">Your message</label>
+                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <!--Grid row-->
+
+            </form>
+
+            <div class="text-md-left" style="margin-top: 20px;">
+                <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
+            </div>
+            <div class="status"></div>
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-md-3 text-center">
+            <ul class="list-unstyled mb-0">
+                <li>
+                    <i class="fas fa-map-marker-alt fa-2x"></i>
+                    <p>Sialkot 51310, Pakistan</p>
+                </li>
+
+                <li>
+                    <i class="fas fa-phone mt-4 fa-2x"></i>
+                    <p>+ 92 000 000 00</p>
+                </li>
+
+                <li>
+                    <i class="fas fa-envelope mt-4 fa-2x"></i>
+                    <p>info@secguardspro.com</p>
+                </li>
+            </ul>
+        </div>
+        <!--Grid column-->
+
+    </div>
+
+</section>
+<!--Section: Contact v.2-->
+<footer class="text-center text-lg-start bg-dark">
+    <!-- Section: Social media -->
+    <!-- Section: Social media -->
+    <!-- Section: Links  -->
+    <!-- <section class="">
+        <div class="container text-center text-md-start mt-5"> -->
+    <!-- Grid row -->
+    <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                <img src="~/images/logo white.png" style="width: 50px;" alt=""> SecGuards Pro
+            </h6>
+            <p>
+                With a focus on reliability and cutting-edge technology, SecGuards Pro offers comprehensive
+                surveillance services for customers looking to safeguard their assets and loved ones
+            </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                Connect with us
+            </h6>
+            <p>
+                <a href="#" class="text-reset"><i class="fa fa-facebook"></i> Facebook</a>
+            </p>
+            <p>
+                <a href="#" class="text-reset"><i class="fa fa-twitter"></i> Twitter</a>
+            </p>
+            <p>
+                <a href="#" class="text-reset"><i class="fa fa-instagram"></i> Instagram</a>
+            </p>
+            <p>
+                <a href="#" class="text-reset"><i class="fa fa-pinterest"></i> Pinterest</a>
+            </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                Useful links
+            </h6>
+            <p>
+                <a asp-controller="Home" asp-action="About" class="text-reset">About us</a>
+            </p>
+            <p>
+                <a asp-controller="Home" asp-action="Contact" class="text-reset">Contact us</a>
+            </p>
+            <p>
+                <a asp-controller="Home" asp-action="Blog" class="text-reset">Blogs</a>
+            </p>
+            <p>
+                <a asp-controller="Home" asp-action="FAQs" class="text-reset">FAQs</a>
+            </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fas fa-home me-3"></i> Sialkot 51310, Punjab, Pakistan</p>
+            <p>
+                <i class="fas fa-envelope me-3"></i>
+                info@secguardspro.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> + 92 300 000 0000</p>
+            <p><i class="fas fa-print me-3"></i> + 92 300 000 0000</p>
+        </div>
+        <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+    </div>
+    </section>
+    <!-- Section: Links  -->
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2023 Copyright:
+        <a class="text-reset fw-bold" asp-controller="Home" asp-action="Index">secguardspro.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
